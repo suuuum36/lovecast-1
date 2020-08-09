@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+
+{% load static %}
+
+    <html>
+      <head>
+        <meta charset="utf-8"
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!--최신 인터넷 익스플로러로 구동한다-->
+        <meta name="viewport" content="width=device-width, initial-scale">  <!--반응형 웹페이지 선언-->
+
+        <title>오늘의 연애</title>  <!--웹페이지 이름-->
+
+        <!-- saved from url=(0013)about:internet --> <!--인터넷 익스플로러에서 발생하는 js 경고문 예방구문-->
+
+        <!-- icon link -->
+        <script src="https://kit.fontawesome.com/55af2b838e.js"></script>
+
+        <!-- font link 폰트:나눔고딕 -->
+        <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&display=swap&subset=korean" rel="stylesheet">
+
+        <!-- user style -->
+        <link rel="stylesheet"  href="{% static 'feedpage/base.css' %}" />  <!--사용자가 만든 css 파일을 쓴다는 의미-->
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script src="{% static 'feedpage/base.js' %}"></script>
+
+      </head>
+
+
+      <header>
+
+         <a href = "/home/"> <img src="{% static 'feedpage/img/logo3.png' %}" class="logo"/></a>
+
+        <div class = "left" sytle ="text-align: center;">
+          <form action="/home/search" method="get">
+            <input type="text" id="search_box" name="hashtags" value="{{ hashtags }}">
+            <button type="submit" id="search_button"><i class="fa fa-search fa-lg" style= "color: #ffffff;"></i></button>
+          </form>
+        </div>
+      
+      
+        <div class = "right" style="text-align: right;">
+
+            <a class = "username">
+            {% if user.is_authenticated %}
+            <!--  <img style = "width: 28px; height: 28px; border-radius: 50%; margin-left: 1px; margin-right: 1px; margin-top: auto; margin-bottom: auto;" src="{{ user.profile.profile_photo.url }}"  alt="">-->
+              {{  user.profile.nickname }}님
+            </a>
+            <p1><a class = "logout" href="{% url 'login'%}?next={{request.path}}">로그아웃</a></p1>
+            <p2><a class = "mypage" href="{% url 'mypage'%}">마이페이지</a></p2>
+
+            <!--알람버튼 -->
+            <a class="button_icon" href= "#popup1"><i class="fas fa-bell fa-sm" style= "color: #ffffff;"></i>
+            <div class = "count_icon" ><p>{{ user.notification_set.count }}</p></div> </a>
+            <div id="popup1" class="overlay">
+              <div class="popup">
+                <div class ="top_alarm">
+                  <div class = "text_alarm"><h2><i id= "cloud_icon" class="fas fa-cloud"></i>예보 알림</h2></div>
+                  <a class="close" href="#">&times;</a>
+                </div>
+                <div class="alarm_content">
+                    {% for notif in notifs %}
+                    <h2>{{ notif.created_at|timesince }}전 {{ notif.title }} {{ notif.message }}</h2>
+                    <div class = "select_button_box">
+                      <form action="/home/notification/{{ notif.id }}/" method="POST" id = "select_button">
+                          {% csrf_token %}
+                          <button id = "button11">읽음으로 표시</button>
+                      </form>
+                    </div>
+                    {% endfor %}
+                </div>
+              </div>
+          {% endif %}
+
+        </div>
+
+      </header>
+
+      <body>
+      {% block content %}
+      {% endblock %}
+      </body>
+
+
+     
+
+      <!--
+
+      <a class="button" href= "#popup1"><i class="fas fa-bell fa-lg" style= "color: #ffffff;"></i></button></a>
+    </div>
+
+    <div id="popup1" class="overlay">
+	    <div class="popup">
+        <div class ="top_alarm">
+          <div class = "text_alarm"><h2>예보 알림</h2></div>
+          <a class="close" href="#">&times;</a>
+        </div>
+        <div class="alarm_content">
+          <button>읽음으로 표시</button>
+        </div>
+      </div>
+알람팝업 창-->
+
+
