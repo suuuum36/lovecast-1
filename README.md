@@ -2,7 +2,7 @@
 
 ### 차세대 연애 고민 SNS 서비스 
 
-백엔드: Django
+백엔드: Django </br>
 프론트엔드: Javascript, HTML, CSS 를 활용하여 개발
 
 ### 1. Landing page
