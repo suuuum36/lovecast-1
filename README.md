@@ -5,17 +5,17 @@
 백엔드: Django
 프론트엔드: Javascript, HTML, CSS 를 활용하여 개발
 
-### Landing page
+### 1. Landing page
 ![main](./githubImageSources/1.png)
 
-### 글 작성
+### 2. 글 작성
 ![main](./githubImageSources/2.png)
 
-### 마이페이지
+### 3. 마이페이지
 ![mypage](./githubImageSources/3.png)
 
-### home
+### 4. home
 ![home1](./githubImageSources/4.png)
 
-### home
+### 5. home
 ![home2](./githubImageSources/img5.png)
